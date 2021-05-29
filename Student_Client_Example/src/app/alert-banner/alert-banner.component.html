@@ -1,0 +1,25 @@
+<mat-card
+  *ngFor="let alert of alerts"
+  class="mat-elevation-z5 main-div center summary-card"
+>
+  <mat-card-content style="display: inline-flex;margin: 10px;">
+    <i aria-hidden="true" class="material-icons" *ngIf="alert.type === 'warning'">warning</i>
+    <i class="material-icons" *ngIf="alert.type === 'info'" style="color: #5c88b3;">info</i>
+    <i
+      aria-hidden="true"
+      class="material-icons"
+      *ngIf="alert.type === 'error'"
+      style="color: #b91d27;"
+      >info_outline</i
+    >&nbsp;&nbsp;
+    <span class="message mat-subtitle-2"
+      ><b>{{ alert.title }}</b
+      >&nbsp;&nbsp;{{ alert.message }}</span
+    >
+  </mat-card-content>
+  <up-button-bar slot="button-bar" class="up-button-bar" *ngIf="alert.closeButton">
+    <up-button button-style="text">
+      <button (click)="toggle(true)">dismiss</button>
+    </up-button>
+  </up-button-bar>
+</mat-card>

@@ -1,0 +1,25 @@
+<div class="login-form-flex">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-subtitle>Student</mat-card-subtitle>
+    </mat-card-header>
+    <form [formGroup]="loginForm" (ngSubmit)="loginPage(loginForm.value)">
+      <mat-card-content>
+        <mat-form-field appearance="fill">
+          <mat-label>User Name</mat-label>
+          <input formControlName="username" matInput autocomplete="off">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Password</mat-label>
+          <input type="password" formControlName="pwd" matInput>
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions>
+        <button type="submit" mat-button color="primary">Login</button>
+        <button type="reset" mat-button color="primary">Reset</button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>

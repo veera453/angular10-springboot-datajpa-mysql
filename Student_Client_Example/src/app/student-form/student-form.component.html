@@ -1,0 +1,164 @@
+<div class="mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div
+            class="mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-10-tablet mdc-layout-grid__cell--span-6-phone">
+
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>Student Details Form</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="studentForm" (ngSubmit)="saveStudent(studentForm.value)">
+        <mat-card-content>
+          <mat-form-field appearance="fill">
+            <mat-label>Student Name</mat-label>
+            <input type="text" formControlName="student_Name" matInput autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Age</mat-label>
+            <input type="number" formControlName="student_Age" matInput autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Gender</mat-label>
+            <mat-select formControlName="student_Gender" >
+              <mat-option *ngFor="let mwcode of MWCodeList" [value]="mwcode">
+                {{mwcode}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Marks</mat-label>
+            <input type="number" formControlName="student_Marks" matInput autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Contact</mat-label>
+            <input type="text" formControlName="student_Contact" matInput autocomplete="off">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="text" formControlName="student_Email" matInput autocomplete="off">
+          </mat-form-field>
+          <!-- <div>
+          <button type="button" mat-button color="primary" (click)="onClick()">
+            <mat-icon>file_upload</mat-icon>
+            {{text}}
+         </button>
+        <br/>
+        <ul>
+            <li *ngFor="let file of files" [@fadeInOut]="file.state">
+                  <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+                  <span id="file-label">
+                  {{file.data.name}}
+                  <a title="Retry" (click)="retryFile(file)" *ngIf="file.canRetry">
+                  <mat-icon>refresh</mat-icon></a>
+                  <a title="Cancel" (click)="cancelFile(file)" *ngIf="file.canCancel">
+                  <mat-icon>cancel</mat-icon></a>
+                  </span>
+            </li>
+        </ul>
+        <input type="file" formControlName="student_Photo" id="fileUpload" name="fileUpload" multiple="multiple"
+
+        accept="{{accept}}" style="display:none;"/>
+      </div> -->
+          <!-- <div>
+          <app-material-file-upload (complete)="onFileComplete($event)"></app-material-file-upload>
+          </div> -->
+          <div>
+            <input #Image type="file" formControlName="student_Photo" (change)="handleFileInput($event.target.files)"/>
+            <img width="100%" *ngIf="imageUrl" [src]="imageUrl" class="image">
+            <!-- <mat-card-content>
+                <ul>
+                    <li *ngFor="let file of files">
+                        <mat-progress-bar [value]="file.progress"></mat-progress-bar>
+                        <span id="file-label">
+
+                        </span>
+                    </li>
+                </ul>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button type="button" color="primary" (click)="onClick()">
+                    <mat-icon>file_upload</mat-icon>
+                    Upload
+                </button>
+            </mat-card-actions>
+          <input type="file" #fileUpload id="fileUpload" formControlName="student_Photo" name="fileUpload" multiple="multiple" accept="image/*" style="display:none;" /> -->
+        </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button type="submit" mat-button color="primary">Submit</button>
+          <button type="reset" mat-button color="primary">Reset</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+    </div>
+
+    <div
+            class="mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-10-tablet mdc-layout-grid__cell--span-6-phone">
+    <mat-accordion >
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false" *ngIf="dataSource.length>0">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Student List
+          </mat-panel-title>
+          <mat-panel-description>
+            Currently I am {{panelOpenState ? 'open' : 'closed'}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%;overflow: auto;
+        max-height: 400px; ">
+
+          <ng-container matColumnDef="student_ID">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>ID.</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">{{ element.student_ID }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="student_Name">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">{{ element.student_Name }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="student_Age">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Age</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">{{ element.student_Age }}</mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="student_Gender">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Gender</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">{{ element.student_Gender }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="student_Marks">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Marks</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">{{ element.student_Marks }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="student_Contact">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Contact</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">{{ element.student_Contact }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="student_Email">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">{{ element.student_Email }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="student_Photo">
+            <mat-header-cell mat-header-cell *matHeaderCellDef>Photo</mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let element">{{ element.student_Photo }}</mat-cell>
+          </ng-container>
+
+          <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></mat-header-row>
+          <mat-header-row mat-row *matRowDef="let row; columns: displayedColumns;"></mat-header-row>
+        </mat-table>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+</div>
+</div>
+  {{studentCourseTemp | json}}

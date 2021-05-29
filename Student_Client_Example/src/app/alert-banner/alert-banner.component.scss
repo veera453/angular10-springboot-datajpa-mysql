@@ -1,0 +1,57 @@
+.summary-card {
+  max-width: 98%;
+  margin: 4px 14px;
+  height: 50px;
+}
+
+.center {
+  width: 98%;
+  margin: 10px auto;
+}
+
+.main-div {
+  height: 12vh;
+  display: flex;
+  align-items: center;
+}
+
+@media print {
+  #printPageButton {
+    display: none;
+  }
+}
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  .main-div {
+    height: 8vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .up-button-bar{
+    margin: 19%;
+  }
+}
+
+/* 
+    ##Device = Laptops, Desktops
+    ##Screen = B/w 1025px to 1280px
+  */
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .main-div {
+    height: 8vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .up-button-bar{
+    margin: 19%;
+  }
+}
+
